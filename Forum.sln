@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumPL", "ForumPL\ForumPL.csproj", "{75CBB2A8-B2FC-4D10-A1EC-BAD6789EC9F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumDAL", "ForumDAL\ForumDAL.csproj", "{14A1A9FA-5FF8-49D5-8F12-87C8F3716AE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumBL", "ForumBL\ForumBL.csproj", "{41E1E0AB-D0A0-4BCB-8DB1-2293FEDD1812}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75CBB2A8-B2FC-4D10-A1EC-BAD6789EC9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CBB2A8-B2FC-4D10-A1EC-BAD6789EC9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CBB2A8-B2FC-4D10-A1EC-BAD6789EC9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CBB2A8-B2FC-4D10-A1EC-BAD6789EC9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A1A9FA-5FF8-49D5-8F12-87C8F3716AE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A1A9FA-5FF8-49D5-8F12-87C8F3716AE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A1A9FA-5FF8-49D5-8F12-87C8F3716AE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A1A9FA-5FF8-49D5-8F12-87C8F3716AE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41E1E0AB-D0A0-4BCB-8DB1-2293FEDD1812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E1E0AB-D0A0-4BCB-8DB1-2293FEDD1812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E1E0AB-D0A0-4BCB-8DB1-2293FEDD1812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E1E0AB-D0A0-4BCB-8DB1-2293FEDD1812}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8FF994E-09AC-41C0-8996-F8E4E2D6740C}
+	EndGlobalSection
+EndGlobal
