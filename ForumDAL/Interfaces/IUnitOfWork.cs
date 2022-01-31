@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 
 namespace ForumDAL.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IPostRepository PostRepository { get; }
+
         IForumRepository ForumRepository { get; }
+
         ICommentRepository CommentRepository { get; }
+
         Task<int> SaveAsync();
     }
 }

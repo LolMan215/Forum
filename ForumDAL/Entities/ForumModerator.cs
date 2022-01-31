@@ -13,10 +13,8 @@ namespace ForumDAL.Entities
         public DateTime Created { get; set; }
 
         [ForeignKey("UserId")]
-        [Required]
         public virtual ApplicationUser User { get; set; }
 
-        [Required]
         public virtual Forum Forum { get; set; }
     }
 }

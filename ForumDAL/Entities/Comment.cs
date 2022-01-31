@@ -14,11 +14,7 @@ namespace ForumDAL.Entities
         public string Body { get; set; }
         public DateTime? Updated { get; set; }
         public DateTime Created { get; set; }
-
-        [Required]
         public virtual Post Post { get; set; }
-
-        [Required]
         public virtual ApplicationUser User { get; set; }
         public virtual Comment Parent { get; set; }
         public virtual ICollection<Comment> Children { get; set; }

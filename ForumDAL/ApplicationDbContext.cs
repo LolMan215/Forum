@@ -43,6 +43,7 @@ namespace ForumDAL
         {
             base.OnModelCreating(modelBuilder);
 
+
             // Forum
 
             modelBuilder.Entity<Forum>()
@@ -125,7 +126,9 @@ namespace ForumDAL
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.User)
                 .WithMany()
-                .HasForeignKey(c => c.UserId);
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+                
 
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.Parent)
@@ -138,11 +141,13 @@ namespace ForumDAL
             modelBuilder.Entity<Comment>()
                 .Property(c => c.UserId).IsRequired();
 
+
             modelBuilder.Entity<Comment>()
                 .Property(c => c.Body).IsRequired();
 
             modelBuilder.Entity<Comment>()
                 .Property(c => c.Created).IsRequired();
+
 
             // CommentHistory
 
@@ -163,7 +168,8 @@ namespace ForumDAL
             modelBuilder.Entity<CommentHistory>()
                 .Property(c => c.Created).IsRequired();
 
-           
+
+
             // ForumModerator
 
             modelBuilder.Entity<ForumModerator>()

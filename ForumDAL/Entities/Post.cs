@@ -17,10 +17,8 @@ namespace ForumDAL.Entities
         public DateTime? Updated { get; set; }
         public DateTime Created { get; set; }
 
-        [Required]
         public virtual ApplicationUser User { get; set; }
 
-        [Required]
         public virtual Forum Forum { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
     }

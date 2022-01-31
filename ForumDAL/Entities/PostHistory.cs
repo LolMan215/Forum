@@ -13,7 +13,6 @@ namespace ForumDAL.Entities
         public string Body { get; set; }
         public DateTime Created { get; set; }
 
-        [Required]
         public virtual Post Post { get; set; }
     }
 }

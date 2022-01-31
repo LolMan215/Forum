@@ -1,5 +1,11 @@
-using ForumPL.Data;
-using ForumPL.Models;
+using AutoMapper;
+using ForumBL;
+using ForumBL.Interfaces;
+using ForumBL.Services;
+using ForumDAL;
+using ForumDAL.Entities;
+using ForumDAL.Interfaces;
+using ForumDAL.Repositories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +41,19 @@ namespace ForumPL
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+
+            AutoMapper.IConfigurationProvider config = new MapperConfiguration(config => config.AddProfile<Automapper>());
+            services.AddSingleton(config);
+            services.AddScoped<IMapper, Mapper>();
+
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IForumRepository, ForumRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IForumService, ForumService>();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();

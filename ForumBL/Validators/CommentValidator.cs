@@ -1,8 +1,5 @@
 ﻿using FluentValidation;
 using ForumBL.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ForumBL.Validators
 {

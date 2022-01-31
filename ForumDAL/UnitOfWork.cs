@@ -1,9 +1,10 @@
 ﻿using ForumDAL.Interfaces;
 using ForumDAL.Repositories;
+using System.Threading.Tasks;
 
 namespace ForumDAL
 {
-    public class UnitOfWork
+    public class UnitOfWork: IUnitOfWork
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -52,6 +53,12 @@ namespace ForumDAL
                 }
                 return _postRepository;
             }
+        }
+
+        public async Task<int> SaveAsync()
+        {
+            var result = await _dbContext.SaveChangesAsync();
+            return result;
         }
     }
 }
