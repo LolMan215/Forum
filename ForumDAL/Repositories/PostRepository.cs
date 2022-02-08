@@ -24,7 +24,7 @@ namespace ForumDAL.Repositories
         public async Task AddAsync(Post entity)
         {
             await _post.AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+             _dbContext.SaveChanges();
         }
 
         public void Delete(Post entity)
@@ -42,12 +42,14 @@ namespace ForumDAL.Repositories
 
         public IQueryable<Post> FindAll()
         {
-            return _post;
+            return _post.Include(x => x.User).Include(y => y.Forum);
         }
 
         public async Task<Post> GetByIdAsync(int id)
         {
-            return await _post.FirstOrDefaultAsync(x => x.Id == id);
+            var res = await _post.Include(x => x.User).Include(y => y.Forum).FirstOrDefaultAsync(x => x.Id == id);
+            _dbContext.Entry(res).State = EntityState.Detached;
+            return res;
         }
 
         public void Update(Post entity)

@@ -10,6 +10,11 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>c8658634-682e-4958-a475-7cee91814260</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\kingo\source\Новая папка\Forum\ForumPL\ForumPL.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +27,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.18" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>

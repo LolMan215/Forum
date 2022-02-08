@@ -35,14 +35,13 @@ namespace ForumBL.Services
 
             var forum = new Forum
             {
-                ParentId = model.ParentId,
+                //ParentId = model.ParentId,
                 Name = model.Name,
                 Created = DateTime.Now
             };
 
-            var storedForum =_unitOfWork.ForumRepository.AddAsync(forum);
-            await _unitOfWork.SaveAsync();
-            return storedForum.Id;
+            _unitOfWork.ForumRepository.AddAsync(forum);
+            return 0;
         }
 
         public async Task DeleteByIdAsync(int modelId)
@@ -58,7 +57,7 @@ namespace ForumBL.Services
             await _unitOfWork.SaveAsync();
         }
 
-        public List<ForumDTO> Get(int page, int pageSize)
+        public List<ForumDTO> Get()
         {
             var data =  GetAll()
                 .OrderByDescending(f => f.Name)
@@ -67,9 +66,7 @@ namespace ForumBL.Services
                     Id = f.Id,
                     Name = f.Name,
                     Created = f.Created
-                })
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize).ToList();
+                }).ToList();
 
             return data;
         }
@@ -79,10 +76,10 @@ namespace ForumBL.Services
             return _mapper.Map<IEnumerable<ForumDTO>>(_unitOfWork.ForumRepository.FindAll());
         }
 
-        public async Task<List<ForumDTO>> GetAllTopLevels(int page, int pageSize)
+        public async Task<List<ForumDTO>> GetAllTopLevels()
         {
-            var data = GetAll()
-                .Where(f => !f.ParentId.HasValue)
+            var data = GetAll().ToList();
+                /*.Where(f => !f.ParentId.HasValue)
                 .Take(pageSize)
                 .Select(f => new ForumDTO
                 {
@@ -90,9 +87,10 @@ namespace ForumBL.Services
                     Name = f.Name
                 })
                 .OrderBy(f => f.Name)
-                .Skip((page - 1) * pageSize).ToList();
+                //.Skip((page - 1) * pageSize)
+                .ToList();*/
 
-            foreach (var f in data)
+            /*foreach (var f in data)
             {
                 var subForums = GetAll()
                     .Where(sf => sf.ParentId.HasValue ? sf.ParentId.Value == f.Id : false)
@@ -103,7 +101,7 @@ namespace ForumBL.Services
                     }).ToList();
 
                 f.SubForums = subForums.Count > 0 ? subForums : null;
-            }
+            }*/
 
             return data;
         }
@@ -122,23 +120,23 @@ namespace ForumBL.Services
                 Created = forum.Created
             };
 
-            if (forum.ParentId.HasValue)
+           /* if (forum.ParentId.HasValue)
             {
                 data.Parent = new ForumDTO
                 {
                     Id = forum.Parent.Id,
                     Name = forum.Parent.Name
                 };
-            }
+            }*/
 
-            if (forum.SubForums.Count > 0)
+           /* if (forum.SubForums.Count > 0)
             {
                 data.SubForums = forum.SubForums.Select(f => new ForumDTO
                 {
                     Id = f.Id,
                     Name = f.Name
                 }).ToList();
-            }
+            }*/
 
             return data;
         }
@@ -146,7 +144,8 @@ namespace ForumBL.Services
         public async Task UpdateAsync(ForumDTO model)
         {
             _unitOfWork.ForumRepository.Update(_mapper.Map<Forum>(model));
-            await _unitOfWork.SaveAsync();
+            
+            //await _unitOfWork.SaveAsync();
         }
 
         public async Task UpdateAsync(int id, ForumDTO model)
@@ -164,10 +163,11 @@ namespace ForumBL.Services
             if (forum == null)
                 throw new Exception();
 
-            forum.ParentId = model.ParentId;
             forum.Name = model.Name;
-
-            await UpdateAsync(forum);
+            
+            _unitOfWork.ForumRepository.Update(_mapper.Map<Forum>(forum));
+            await _unitOfWork.SaveAsync();
+            //await UpdateAsync(forum);
         }
     }
 }

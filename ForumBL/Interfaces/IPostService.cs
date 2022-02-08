@@ -9,7 +9,7 @@ namespace ForumBL.Interfaces
 {
     public interface IPostService : ICrud<PostDTO>
     {
-        Task<IEnumerable<PostDTO>> GetByForumId(int id, int page, int pageSize);
+        Task<IEnumerable<PostDTO>> GetByForumId(int id);
 
         Task UpdateAsync(int id, PostDTO model);
     }

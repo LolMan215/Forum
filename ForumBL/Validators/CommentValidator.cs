@@ -19,8 +19,8 @@ namespace ForumBL.Validators
     {
         public CommentEditValidator()
         {
-            RuleFor(x => x.Id)
-                .NotEmpty();
+            /*RuleFor(x => x.Id)
+                .NotEmpty();*/
 
             RuleFor(x => x.Body)
                 .NotEmpty();

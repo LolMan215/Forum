@@ -2,18 +2,21 @@
 using ForumBL.DTOs;
 using ForumBL.Interfaces;
 using ForumBL.Validators;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web.Http;
+
 
 namespace ForumPL.Controllers
 {
-    [Authorize]
-    [RoutePrefix("api/comments")]
-    public class CommentsController : ApiController
+    //[Authorize]
+    [ApiController]
+    [Route("api/comments")]
+    public class CommentsController : Controller
     {
         private readonly ICommentService _commentService;
 
@@ -25,32 +28,32 @@ namespace ForumPL.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("postid/{id:int}")]
-        public async Task<IHttpActionResult> GetByPostId(int id, int page = 1, int pageSize = 15)
+        public async Task<ActionResult> GetByPostId(int id, int page = 1, int pageSize = 15)
         {         
-            return Ok(await _commentService.GetByPostId(id, page, pageSize));
+            return Ok(await _commentService.GetByPostId(id));
         }
 
         [HttpPost]
         [Route("create")]
-        public async Task<IHttpActionResult> CreateNew([FromBody] CommentDTO data)
+        public async Task<ActionResult> CreateNew([FromBody] CommentDTO data)
         {            
             return Ok(_commentService.AddAsync(data));
         }
 
         [HttpPatch]
         [Route("{id}/edit")]
-        public async Task<IHttpActionResult> Edit(int id, [FromBody] CommentDTO data)
+        public async Task<ActionResult> Edit(int id, [FromBody] CommentDTO data)
         {
             await _commentService.UpdateAsync(id, data);
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(204); //NoContent
         }
 
         [HttpDelete]
         [Route("{id:int}/delete")]
-        public async Task<IHttpActionResult> Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             await _commentService.DeleteByIdAsync(id);
-            return StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(204); //NoContent
         }
     }
 

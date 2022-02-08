@@ -22,8 +22,8 @@ namespace ForumBL.Validators
     {
         public PostEditValidator()
         {
-            RuleFor(x => x.Id)
-                .NotEmpty();
+            /*RuleFor(x => x.Id)
+                .NotEmpty();*/
 
             RuleFor(x => x.Title)
                 .NotEmpty();

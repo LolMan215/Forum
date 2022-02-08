@@ -10,8 +10,8 @@ namespace ForumBL.Interfaces
     {
         Task UpdateAsync(int id, ForumDTO model);
 
-        Task<List<ForumDTO>> GetAllTopLevels(int page, int pageSize);
+        Task<List<ForumDTO>> GetAllTopLevels();
 
-        List<ForumDTO> Get(int page, int pageSize);
+        List<ForumDTO> Get();
     }
 }

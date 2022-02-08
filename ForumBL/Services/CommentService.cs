@@ -34,7 +34,7 @@ namespace ForumBL.Services
 
             var comment = new Comment
             {
-                UserId = model.UserId,//fix later
+                UserId = model.UserId,
                 PostId = model.PostId.Value,
                 Body = model.Body,
                 Updated = DateTime.Now,
@@ -43,7 +43,7 @@ namespace ForumBL.Services
 
             var storedComment = _unitOfWork.CommentRepository.AddAsync(comment);
             await _unitOfWork.SaveAsync();
-            return storedComment.Id; //fix later
+            return storedComment.Id; 
         }
 
         public async Task DeleteByIdAsync(int modelId)
@@ -97,16 +97,16 @@ namespace ForumBL.Services
             return _mapper.Map<CommentDTO>(res);
         }
 
-        public async Task<List<CommentDTO>> GetByPostId(int id, int page, int pageSize)
+        public async Task<List<CommentDTO>> GetByPostId(int id)
         {
             var data = GetAll()
                 .OrderBy(p => p.Created)
-                .Where(c => c.PostId == id && !c.ParentId.HasValue)
+                .Where(c => c.PostId == id)
                 .Select(c => new CommentDTO
                 {
                     Id = c.Id,
                     PostId = c.PostId,
-                    ParentId = c.ParentId,
+                    UserId = c.UserId,
                     Body = c.Body,
                     Updated = c.Updated,
                     Created = c.Created,
@@ -114,9 +114,7 @@ namespace ForumBL.Services
                     {
                         UserName =  c.User.UserName
                     }
-                })
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize).ToList();
+                }).ToList();
 
             foreach (var comment in data)
             {

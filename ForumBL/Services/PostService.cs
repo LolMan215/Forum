@@ -35,8 +35,8 @@ namespace ForumBL.Services
 
             var post = new Post
             {
-                UserId = model.UserId, //fix later
-                ForumId = model.Forum.Id,
+                UserId = model.UserId, ////TODO
+                ForumId = (int)model.ForumId,
                 Title = model.Title,
                 Body = model.Body,
                 IsLocked = false,
@@ -70,7 +70,7 @@ namespace ForumBL.Services
             return _mapper.Map<IEnumerable<PostDTO>>(_unitOfWork.PostRepository.FindAll());
         }
 
-        public async Task<IEnumerable<PostDTO>> GetByForumId(int id, int page, int pageSize)
+        public async Task<IEnumerable<PostDTO>> GetByForumId(int id)
         {
             var data = GetAll()
                 .OrderByDescending(p => p.Updated)
@@ -82,6 +82,8 @@ namespace ForumBL.Services
                     Id = p.Id,
                     ForumId = p.ForumId,
                     Title = p.Title,
+                    Body = p.Body,
+                    UserId = p.UserId,
                     IsLocked = p.IsLocked,
                     Updated = p.Updated,
                     Created = p.Created,
@@ -89,9 +91,8 @@ namespace ForumBL.Services
                     {
                         UserName = p.User.UserName
                     }
-                })
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize);
+                });
+               
 
             return data;
         }
@@ -112,6 +113,8 @@ namespace ForumBL.Services
                 LockedReason = post.LockedReason,
                 Updated = post.Updated,
                 Created = post.Created,
+                UserId = post.UserId,
+                ForumId = post.ForumId,
                 User = new UserDTO
                 {
                     UserName = post.User.UserName

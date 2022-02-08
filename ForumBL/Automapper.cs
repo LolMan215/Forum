@@ -13,6 +13,7 @@ namespace ForumBL
                 .ReverseMap();
 
             CreateMap<Forum, ForumDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(forum => forum.Id))
                 .ReverseMap();
 
             CreateMap<Post, PostDTO>()

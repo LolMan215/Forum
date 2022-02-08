@@ -23,20 +23,12 @@ namespace ForumDAL
         public virtual DbSet<CommentHistory> CommentsHistory { get; set; }
 
         public virtual DbSet<ForumModerator> ForumsModerators { get; set; }
-        /*public ApplicationDbContext()
-            : base()
-        {
-        }*/
+
         public ApplicationDbContext(
            DbContextOptions options,
            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
-
-        /*public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }*/
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,10 +41,10 @@ namespace ForumDAL
             modelBuilder.Entity<Forum>()
                 .HasKey(f => f.Id);
 
-            modelBuilder.Entity<Forum>()
+            /*modelBuilder.Entity<Forum>()
                 .HasOne(f => f.Parent)
                 .WithMany(f => f.SubForums)
-                .HasForeignKey(f => f.ParentId);
+                .HasForeignKey(f => f.ParentId);*/
 
             modelBuilder.Entity<Forum>()
                 .Property(f => f.Name).IsRequired();
